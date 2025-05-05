@@ -99,6 +99,7 @@ These confirm the image passed integrity checks and hasn’t been altered post-c
 ### Renaming the `.dat` files to `.png`
 ```PowerShell
 Get-ChildItem *.dat | Rename-Item -NewName { $_.Name -replace '\.dat$', '.png' }
+```
 
 ## JSON & HTML
 You will have a chat.html and a conversations.json, message_feedback.json, shared_conversations.json and user.json
