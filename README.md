@@ -1,6 +1,10 @@
 # ChatGPT Data Export Toolkit
-
 Tools and instructions for working with a local export of your ChatGPT data.
+
+## About & Donate
+These tools were created by **Lupa** and slightly modified by **Fitz (Jack'D)**.
+
+If these helped you and you'd like to send me something, my **cashapp is $asdf1239er**, and I can be contacted at **jackd A@T ethertech.org**
 
 ---
 
@@ -119,8 +123,3 @@ Run "python unpack_conversations.py" in the same directory as conversations.json
 
 ### Getting the Created Date, Dialog and Tool output (cleaning) from the `.md` files
 Then run "python clean_dialogs_headers.py" in the same directory, it will load the files from "markdown_outputs" (which must exist, with the .md files) and create a folder called "cleaned_dialogs", which has the date of the conversation, the dialog, the Tools output referencing any created images with the DALL-E Gen IDs.
-
-## About
-These tools were created by **Lupa** and slightly modified by **Fitz (Jack'D)**.
-
-If these helped you and you'd like to send me something, my **cashapp is $asdf1239er**, and I can be contacted at **jackd A@T ethertech.org**
