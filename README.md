@@ -36,6 +36,26 @@ When you download your data from ChatGPT, you'll get:
 
 ---
 
+## JSON & HTML
+
+- `chat.html`: has all your chats as an html file
+
+- `conversations.json`: is a single line containing all the chats, probably too large to open in VSCode.
+
+- `message_feedback.json`: These are all your thumbs up/down with descriptions in a single line .json file
+
+- `shared_conversations.json`: Likely for public/shared group chats.
+
+- `user.json`: ID, email, user type, birth year
+
+### Getting nicely formatted JSON from `conversations.json`
+Run the python script [unpack_conversations.py](https://github.com/jack-driscoll/chatgpt-dataexport/blob/main/unpack_conversations.py) in the same directory as conversations.json.  It will create a folde called "markdown_outputs" with all the chats as markdown files.
+
+### Getting the Created Date, Dialog and Tool output (cleaning) from the `.md` files
+Then run the python script [clean_dialogs_headers.py](https://github.com/jack-driscoll/chatgpt-dataexport/blob/main/clean_dialogs_headers.py) in the same directory, it will load the files from "markdown_outputs" (which must exist, with the .md files) and create a folder called "cleaned_dialogs", which has the date of the conversation, the dialog, the Tools output referencing any created images with the DALL-E Gen IDs.
+
+---
+
 ## .dat files
 First thing, the .dat files are actually PNGs with C2PA metadata as described here ( https://help.openai.com/en/articles/8912793-c2pa-in-chatgpt-images )
 
@@ -43,7 +63,14 @@ This `.dat` file is actually a PNG image file. We can tell because the first byt
 
 `\x89PNG\r\n\x1a\n`
 
-### Metadata
+### Renaming the `.dat` files to `.png`
+```PowerShell
+Get-ChildItem *.dat | Rename-Item -NewName { $_.Name -replace '\.dat$', '.png' }
+```
+
+---
+
+## Metadata
 It looks like the file also contains embedded metadata, possibly related to content provenance or generative origin. I see tags like:
 
     c2pa — likely referring to C2PA (Coalition for Content Provenance and Authenticity)
@@ -100,26 +127,3 @@ These confirm the image passed integrity checks and hasn’t been altered post-c
     Truepic Lens CLI
 
     c2pa_rsf0.48.2 (possibly a reference to a C2PA manifest version or framework)
-
-### Renaming the `.dat` files to `.png`
-```PowerShell
-Get-ChildItem *.dat | Rename-Item -NewName { $_.Name -replace '\.dat$', '.png' }
-```
-
-## JSON & HTML
-
-- `chat.html`: has all your chats as an html file
-
-- `conversations.json`: is a single line containing all the chats, probably too large to open in VSCode.
-
-- `message_feedback.json`: These are all your thumbs up/down with descriptions in a single line .json file
-
-- `shared_conversations.json`: Likely for public/shared group chats.
-
-- `user.json`: ID, email, user type, birth year
-
-### Getting nicely formatted JSON from `conversations.json`
-Run the python script [unpack_conversations.py](https://github.com/jack-driscoll/chatgpt-dataexport/blob/main/unpack_conversations.py) in the same directory as conversations.json.  It will create a folde called "markdown_outputs" with all the chats as markdown files.
-
-### Getting the Created Date, Dialog and Tool output (cleaning) from the `.md` files
-Then run the python script [clean_dialogs_headers.py](https://github.com/jack-driscoll/chatgpt-dataexport/blob/main/clean_dialogs_headers.py) in the same directory, it will load the files from "markdown_outputs" (which must exist, with the .md files) and create a folder called "cleaned_dialogs", which has the date of the conversation, the dialog, the Tools output referencing any created images with the DALL-E Gen IDs.
