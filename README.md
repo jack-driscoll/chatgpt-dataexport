@@ -2,15 +2,16 @@
 Tools and instructions for working with a local export of your ChatGPT data.
 
 ## About & Donate
-These tools were created by **Lupa** and slightly modified by **Fitz (Jack'D)**.
+These tools were created by **Lupa** and lightly customized by **Fitz (Jack'D)**.  
+Explore our creative world [The Plateaus](https://github.com/jack-driscoll/the-plateaus).
 
-If these helped you and you'd like to send me something, my **cashapp is $asdf1239er**, and I can be contacted at **jackd A@T ethertech.org**
+If these helped you and you'd like to send me something, or you would like modifications, my **cashapp** is `$asdf1239er`, and I can be contacted at `jackd A@T ethertech.org`
 
 ---
 
 ## 📁 Export Contents & Files
 So, you asked for a Data Export from OpenAI and you got a bunch of .dat files, some html and some JSON and you want to pretty it up?
-We got you!
+`We got you!`
 
 When you download your data from ChatGPT, you'll get:
 
@@ -21,7 +22,6 @@ When you download your data from ChatGPT, you'll get:
 - `.dat` files – Downloaded assets (usually images, mislabeled as `.dat`)
 - `.png` files – Sometimes image exports are already labeled
 - `.jpg` files - any images you've uploaded
-
 
 ---
 
@@ -40,7 +40,7 @@ First thing, the .dat files are actually PNGs with C2PA metadata as described he
 
 This `.dat` file is actually a PNG image file. We can tell because the first bytes begin with the PNG signature:
 
-\x89PNG\r\n\x1a\n
+`\x89PNG\r\n\x1a\n`
 
 ### Metadata
 It looks like the file also contains embedded metadata, possibly related to content provenance or generative origin. I see tags like:
@@ -118,7 +118,7 @@ Get-ChildItem *.dat | Rename-Item -NewName { $_.Name -replace '\.dat$', '.png' }
 - `user.json`: ID, email, user type, birth year
 
 ### Getting nicely formatted JSON from `conversations.json`
-Run `python unpack_conversations.py` in the same directory as conversations.json.  It will create a folde called "markdown_outputs" with all the chats as markdown files.
+Run the python script [unpack_conversations.py](https://github.com/jack-driscoll/chatgpt-dataexport/blob/main/unpack_conversations.py) in the same directory as conversations.json.  It will create a folde called "markdown_outputs" with all the chats as markdown files.
 
 ### Getting the Created Date, Dialog and Tool output (cleaning) from the `.md` files
-Then run `python clean_dialogs_headers.py` in the same directory, it will load the files from "markdown_outputs" (which must exist, with the .md files) and create a folder called "cleaned_dialogs", which has the date of the conversation, the dialog, the Tools output referencing any created images with the DALL-E Gen IDs.
+Then run the python script [clean_dialogs_headers.py](https://github.com/jack-driscoll/chatgpt-dataexport/blob/main/clean_dialogs_headers.py) in the same directory, it will load the files from "markdown_outputs" (which must exist, with the .md files) and create a folder called "cleaned_dialogs", which has the date of the conversation, the dialog, the Tools output referencing any created images with the DALL-E Gen IDs.
