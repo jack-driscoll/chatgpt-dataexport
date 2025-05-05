@@ -57,7 +57,7 @@ Then run the python script [clean_dialogs_headers.py](https://github.com/jack-dr
 ---
 
 ## .dat files
-First thing, the .dat files are actually PNGs with C2PA metadata as described here ( https://help.openai.com/en/articles/8912793-c2pa-in-chatgpt-images )
+First thing, the .dat files are actually PNGs with C2PA metadata as [described her](https://help.openai.com/en/articles/8912793-c2pa-in-chatgpt-images)
 
 This `.dat` file is actually a PNG image file. We can tell because the first bytes begin with the PNG signature:
 
