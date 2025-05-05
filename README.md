@@ -106,20 +106,19 @@ Get-ChildItem *.dat | Rename-Item -NewName { $_.Name -replace '\.dat$', '.png' }
 ```
 
 ## JSON & HTML
-You will have a chat.html and a conversations.json, message_feedback.json, shared_conversations.json and user.json
 
-**chat.html**: has all your chats as an html file
+- `chat.html`: has all your chats as an html file
 
-**conversations.json**: is a single line containing all the chats, probably too large to open in VSCode.
+- `conversations.json`: is a single line containing all the chats, probably too large to open in VSCode.
 
-**message_feedback.json**: These are all your thumbs up/down with descriptions in a single line .json file
+- `message_feedback.json`: These are all your thumbs up/down with descriptions in a single line .json file
 
-**shared_conversations.json**: Likely for public/shared group chats.
+- `shared_conversations.json`: Likely for public/shared group chats.
 
-**user.json**: ID, email, user type, birth year
+- `user.json`: ID, email, user type, birth year
 
 ### Getting nicely formatted JSON from `conversations.json`
-Run "python unpack_conversations.py" in the same directory as conversations.json.  It will create a folde called "markdown_outputs" with all the chats as markdown files.
+Run `python unpack_conversations.py` in the same directory as conversations.json.  It will create a folde called "markdown_outputs" with all the chats as markdown files.
 
 ### Getting the Created Date, Dialog and Tool output (cleaning) from the `.md` files
-Then run "python clean_dialogs_headers.py" in the same directory, it will load the files from "markdown_outputs" (which must exist, with the .md files) and create a folder called "cleaned_dialogs", which has the date of the conversation, the dialog, the Tools output referencing any created images with the DALL-E Gen IDs.
+Then run `python clean_dialogs_headers.py` in the same directory, it will load the files from "markdown_outputs" (which must exist, with the .md files) and create a folder called "cleaned_dialogs", which has the date of the conversation, the dialog, the Tools output referencing any created images with the DALL-E Gen IDs.
