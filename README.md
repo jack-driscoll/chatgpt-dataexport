@@ -69,6 +69,7 @@ Well that's *too bad* because **I've included features to do exactly that** if y
 You can even zip them by hand or, optionally, pay me to add a zip function (it was giving me a hard time so I took it out).
 
 `chatgpt-saladshooter-batchmode.py` is a work in progress for batch processing using pandoc.
+
 =======
 
 - `chat.html`: has all your chats as an html file
