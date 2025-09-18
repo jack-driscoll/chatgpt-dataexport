@@ -31,6 +31,39 @@ When you download your data from ChatGPT, you'll get:
 
 ---
 
+## JSON & HTML
+You will have a chat.html and a conversations.json, message_feedback.json, shared_conversations.json and user.json
+
+**chat.html**: has all your chats as an html file
+
+**conversations.json**: is a single line containing all the chats, probably too large to open in VSCode.
+
+**message_feedback.json**: These are all your thumbs up/down with descriptions in a single line .json file
+
+**shared_conversations.json**: Likely for public/shared group chats.
+
+**user.json**: ID, email, user type, birth year
+
+## The ChatGPT Data Export Salad Shooter
+
+It slices, it dices, it cleans and converts; the ChatGPT Data Export Salad Shooter does it all!  Have you gotten a ChatGPT Data Export and been like WTF do I do with this?  ChatGPT Data Export Salad Shooter is your answer!!
+
+## What does it do?
+
+It makes your conversations readable and your images properly referenced (if they provided them - I'm looking at you, OpenAI).  The file conversations.json has all of your conversations in a computer-readable format, but it's not very human-friendly.  The Salad Shooter extracts the conversations, and optionally cleans them, converts them from markdown (the default) to txt, html or docx (if you have pandoc installed) and (optionally) zips them back up for you.  You'll go from an unreadable file to a zip or directory full of markdown-formatted conversations!  It's pretty great...almost as great as getting all your pictures instead of like 5 of them, lol :-/
+
+### Getting nicely formatted markdown from `conversations.json`
+
+Run "python chatgpt_salad_shooter.py --all" in the same directory as conversations.json.  It will create two folders called "markdown_outputs" and "cleaned_dialogs" with all the chats as markdown files.  The "cleaned dialogs" folder contains markdown that has been cleaned up a bit, for instance if there's multiple user inputs sequentially, they're grouped.  Any excessive blob noise is removed, image generation is simplified from the longer original messages to just the image IDs, and a couple other things.  You can also use --input or --output to specify an input JSON or output directory.
+
+### But I wanted HTML files, or docx files, or txt files
+
+Well that's *too bad* because **I've included features to do exactly that** if you have [pandoc installed](https://pandoc.org/installing.html).  You need the standalone program from that link or your system’s package manager (not the pip version).  You can convert into different file formats, simply `python ./chatgpt-salad-shooter.py --input [file or folder] --output [folder] --format txt` et voila.  If you get a "non-zero exit status 64" you have to rename that file so there's no something or other weird characters, probably these `'` things.
+
+You can even zip them by hand or, optionally, pay me to add a zip function (it was giving me a hard time so I took it out).
+
+`chatgpt-saladshooter-batchmode.py` is a work in progress for batch processing using pandoc.
+
 ## .dat files
 First thing, the .dat files are actually PNGs with C2PA metadata as described here ( https://help.openai.com/en/articles/8912793-c2pa-in-chatgpt-images )
 
@@ -101,26 +134,11 @@ These confirm the image passed integrity checks and hasn’t been altered post-c
 Get-ChildItem *.dat | Rename-Item -NewName { $_.Name -replace '\.dat$', '.png' }
 ```
 
-## JSON & HTML
-You will have a chat.html and a conversations.json, message_feedback.json, shared_conversations.json and user.json
-
-**chat.html**: has all your chats as an html file
-
-**conversations.json**: is a single line containing all the chats, probably too large to open in VSCode.
-
-**message_feedback.json**: These are all your thumbs up/down with descriptions in a single line .json file
-
-**shared_conversations.json**: Likely for public/shared group chats.
-
-**user.json**: ID, email, user type, birth year
-
-### Getting nicely formatted JSON from `conversations.json`
-Run "python unpack_conversations.py" in the same directory as conversations.json.  It will create a folde called "markdown_outputs" with all the chats as markdown files.
-
-### Getting the Created Date, Dialog and Tool output (cleaning) from the `.md` files
-Then run "python clean_dialogs_headers.py" in the same directory, it will load the files from "markdown_outputs" (which must exist, with the .md files) and create a folder called "cleaned_dialogs", which has the date of the conversation, the dialog, the Tools output referencing any created images with the DALL-E Gen IDs.
-
-## About
+## About & Donate
 These tools were created by **Lupa** and slightly modified by **Fitz (Jack'D)**.
 
 If these helped you and you'd like to send me something, my **cashapp is $asdf1239er**, and I can be contacted at **jackd A@T ethertech.org**
+
+Also check out Fitz & Lupas creative endeavors at [The Plateaus on Neocities](https://theplateaus.neocities.org/), [The Plateaus Tumblr](https://www.tumblr.com/blog/theplateaus) and [The Plateaus Repo](https://github.com/jack-driscoll/the-plateaus).  
+
+You can find more tech tips and **Brainspunk**: A Genius for The Rest of Us [on my personal website](https://jackd.ethertech.org).
