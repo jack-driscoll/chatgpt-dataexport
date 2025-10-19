@@ -41,6 +41,10 @@ def unpack_conversations(input_file: str, output_dir: str):
         update_time = datetime.fromtimestamp(convo["update_time"]).strftime("%Y-%m-%d %H:%M:%S")
         mapping = convo["mapping"]
 
+        if not mapping:
+            print(f"[WARN] Skipping {convo.get('title','Untitled')} — no mapping found.")
+            continue
+
         # Find root
         root_id = next((k for k, v in mapping.items() if v["parent"] is None), None)
         messages = []
@@ -261,7 +265,7 @@ def main():
     parser.add_argument("--all", action="store_true", help="Run unpack then clean")
     parser.add_argument("--input", type=str, help="Input file or folder", default=None)
     parser.add_argument("--output", type=str, help="Output folder", default=None)
-#    parser.add_argument("--zip", action="store_true", help="Zip the output folder")
+    parser.add_argument("--zip", action="store_true", help="Zip the output folder")
     parser.add_argument("--format", type=str, choices=["md", "txt", "html", "docx"], help="Convert cleaned files to another format with pandoc")
 
     args = parser.parse_args()
